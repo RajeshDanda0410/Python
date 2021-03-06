@@ -2,23 +2,23 @@ import json, os
 import shutil
 
 
-PARENT_DIR = "quotes_output"
+PARENT = "quotes"
 
-with open("quotes.json", 'r') as quotes_file:
-	data = json.load(quotes_file)
+with open("quotes.json", 'r') as quotesFile:
+	data = json.load(quotesFile)
 
-if os.path.exists(PARENT_DIR):
-	shutil.rmtree(PARENT_DIR)
+if os.path.exists(PARENT):
+	shutil.rmtree(PARENT)
 
-os.mkdir(PARENT_DIR) 
-os.chdir(PARENT_DIR) 
-print("Created parent directory ", PARENT_DIR)
+os.mkdir(PARENT) 
+os.chdir(PARENT) 
+print(" Parent directory ", PARENT)
 
 for node in data:
-	corrected_author = node["author"] if node["author"] is not None else "Unknown"
-	dir_name = corrected_author.replace(" ", "_")
-	os.mkdir(dir_name) if not os.path.exists(dir_name) else print("{} already exists".format(dir_name))
-	os.chdir(dir_name)
+	correctedAuthor = node["author"] if node["author"] is not None else "Unknown"
+	dirName = correctedAuthor.replace(" ", "_")
+	os.mkdir(dirName) if not os.path.exists(dirName) else print("{} exists".format(dirName))
+	os.chdir(dirName)
 	ls=os.listdir()
 	if not ls:
 		out = open("quote.txt", "w")
